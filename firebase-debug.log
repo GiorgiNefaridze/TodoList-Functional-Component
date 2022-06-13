@@ -1,0 +1,43 @@
+[debug] [2022-06-13T09:25:30.449Z] ----------------------------------------------------------------------
+[debug] [2022-06-13T09:25:30.453Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\User\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2022-06-13T09:25:30.455Z] CLI Version:   11.0.1
+[debug] [2022-06-13T09:25:30.455Z] Platform:      win32
+[debug] [2022-06-13T09:25:30.455Z] Node Version:  v16.14.0
+[debug] [2022-06-13T09:25:30.457Z] Time:          Mon Jun 13 2022 13:25:30 GMT+0400 (საქართველოს სტანდარტული დრო)
+[debug] [2022-06-13T09:25:30.458Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-06-13T09:25:30.757Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-06-13T09:25:30.758Z] > authorizing via signed-in user (nefogio1@gmail.com)
+[debug] [2022-06-13T09:25:30.759Z] [iam] checking project todo-list-f8d0f for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-06-13T09:25:30.766Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/todo-list-f8d0f:testIamPermissions [none]
+[debug] [2022-06-13T09:25:30.767Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/todo-list-f8d0f:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-06-13T09:25:31.227Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/todo-list-f8d0f:testIamPermissions 200
+[debug] [2022-06-13T09:25:31.228Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/todo-list-f8d0f:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-06-13T09:25:31.230Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/todo-list-f8d0f [none]
+[debug] [2022-06-13T09:25:31.620Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/todo-list-f8d0f 200
+[debug] [2022-06-13T09:25:31.621Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/todo-list-f8d0f {"projectId":"todo-list-f8d0f","projectNumber":"141586883805","displayName":"Todo List","name":"projects/todo-list-f8d0f","resources":{"hostingSite":"todo-list-f8d0f"},"state":"ACTIVE"}
+[info] 
+[info] === Deploying to 'todo-list-f8d0f'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-06-13T09:25:31.634Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/todo-list-f8d0f [none]
+[debug] [2022-06-13T09:25:32.025Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/todo-list-f8d0f 200
+[debug] [2022-06-13T09:25:32.025Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/todo-list-f8d0f {"projectId":"todo-list-f8d0f","projectNumber":"141586883805","displayName":"Todo List","name":"projects/todo-list-f8d0f","resources":{"hostingSite":"todo-list-f8d0f"},"state":"ACTIVE"}
+[debug] [2022-06-13T09:25:32.035Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/141586883805/sites/todo-list-f8d0f/versions [none]
+[debug] [2022-06-13T09:25:32.035Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/141586883805/sites/todo-list-f8d0f/versions {"config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-06-13T09:25:33.410Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/141586883805/sites/todo-list-f8d0f/versions 500
+[debug] [2022-06-13T09:25:33.410Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/141586883805/sites/todo-list-f8d0f/versions {"error":{"code":500,"message":"Internal error encountered.","status":"INTERNAL"}}
+[error] 
+[error] Error: HTTP Error: 500, Internal error encountered.
+[debug] [2022-06-13T09:25:33.417Z] Error Context: {
+  "body": {
+    "error": {
+      "code": 500,
+      "message": "Internal error encountered.",
+      "status": "INTERNAL"
+    }
+  },
+  "response": {
+    "statusCode": 500
+  }
+}

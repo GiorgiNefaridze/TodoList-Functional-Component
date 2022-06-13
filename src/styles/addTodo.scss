@@ -1,0 +1,61 @@
+header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px 0;
+
+    h1 {
+        font-weight: 700;
+        font-size: 40px;
+        color: white;
+    }
+
+    form {
+        width: 100%;
+        height: 40px;
+        display: flex;
+        gap: 0 15px;
+        justify-content: center;
+        font-family: 'Open sans';
+
+        input {
+            width: 40%;
+            height: 100%;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #264653;
+            padding: 10px;
+            font-weight: 400;
+            font-size: 16px;
+        }
+
+        button {
+            width: 15%;
+            height: 100%;
+            cursor: pointer;
+            outline: none;
+            border: none;
+            border-bottom: 1px solid #264653;
+            background-color: #e9c46a;
+            font-weight: 600;
+        }
+    }
+
+    .todo-blink {
+        color: white;
+        font-size: 17px;
+        animation: blinkAnimation 1.5s infinite;
+    }
+
+}
+
+@keyframes blinkAnimation {
+    from {
+        opacity: 0
+    }
+
+    to {
+        opacity: 1
+    }
+}

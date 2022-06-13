@@ -1,0 +1,67 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    background-color: #f4a261;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.todo-app {
+    width: 750px;
+    height: 500px;
+    background-color: #2c6277;
+    padding-block: 30px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px 0;
+    font-family: 'Open sans';
+    border-radius: 10px;
+    position: relative;
+
+    footer {
+        position: absolute;
+        bottom: 30px;
+        left: 0;
+        right: 0;
+        width: 69%;
+        margin: auto;
+        height: 40px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+
+        button {
+            width: auto;
+            height: 100%;
+            outline: none;
+            border: none;
+            background-color: #e9c46a;
+            font-family: "Open sans";
+            color: rgba(0, 0, 0, 0.84);
+            font-size: 15px;
+            font-weight: 600;
+            padding: 10px;
+            transition: All .5s;
+            cursor: pointer;
+            
+            &.btn-disable{
+                opacity:.7;
+            }
+        }
+    }
+}

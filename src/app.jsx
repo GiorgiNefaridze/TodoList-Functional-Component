@@ -1,0 +1,84 @@
+import { Component } from 'react'
+import AddTodo from './components/addTodo';
+import TodoList from './components/todoList';
+import TodoDelateButtons from './components/todoDelates';
+import './styles/app.scss'
+
+class TodoApp extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            todos:[]
+        }
+    };
+
+    addTodo = todo => {
+        this.setState({todos:[...this.state.todos,todo]})
+    }
+
+    todoUpdate = (todo,e) => {
+        const newTodo = this.state.todos.map(eachTodo => {
+            if(eachTodo === todo){
+                e.target.innerHTML = !todo.complete ? "Undo" : "Done"
+                return {
+                    text:todo.text,
+                    id:todo.id,
+                    complete:!todo.complete,
+                    checked:todo.checked
+                }
+            }else{
+                return eachTodo
+            }
+        });
+        this.setState({todos:newTodo})
+        console.log(this.state.todos)
+    }
+
+    delateTodo = todo =>{
+        const filterByDelate = this.state.todos.filter(eachTodo => eachTodo.id !== todo.id);
+        this.setState({todos:filterByDelate})
+    }
+
+    delateAll = () => {
+        this.setState({todos:[]});
+    }
+
+    delateAllConfirmed = todo => {
+        todo.map(el => {
+            if(el.complete){
+                const delateAllConfirmed =  this.state.todos.filter(element => element.complete === false);
+                this.setState({todos:delateAllConfirmed})
+            }
+        })
+    }
+
+    labelClicked = (todo,e) => {
+        if(!e.target.parentElement.childNodes[0].checked){
+            todo.checked = false;
+            todo.checked = !todo.checked
+        }
+    }
+
+    deleteAllChecked = () => {
+        const deleteAllChecked = this.state.todos.filter(todo => todo.checked !== true);
+        this.setState({todos: deleteAllChecked})
+    }
+
+    render(){
+        return (
+            <div className="todo-app">
+                <header>
+                    <AddTodo todos={this.state.todos} addTodo={this.addTodo} />
+                </header>
+                <main>
+                    <TodoList labelClicked={this.labelClicked} delateTodo={this.delateTodo} todos={this.state.todos} todoUpdate={this.todoUpdate} />
+                </main>
+                <footer>
+                    <TodoDelateButtons deleteAllChecked={this.deleteAllChecked} todos={this.state.todos} delateAllConfirmed={this.delateAllConfirmed} delateAll={this.delateAll} />
+                </footer>
+            </div>
+        )
+    }
+}
+
+export default TodoApp

@@ -11,6 +11,7 @@ class TodoList extends Component {
         return(
             <ul>
                 {this.props.todos.map(todo => (
+                    todo.text !== " " &&
                     <div key={todo.id} className={todo.complete ? "todo-li li-active " : "todo-li"}>
                         <div className="todoText_Checkbox">
                             <label>

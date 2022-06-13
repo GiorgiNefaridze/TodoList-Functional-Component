@@ -11,7 +11,7 @@ class TodoDelateButtons extends Component {
             <>
                 <button className={this.props.todos.length < 1 ? "btn-disable" : ""} onClick={()=> this.props.delateAll()}>Delete All</button>
                 <button className={this.props.todos.length < 1 ? "btn-disable" : ""} onClick={()=> this.props.deleteAllChecked()}>Delete All Checked</button>
-                <button className={this.props.todos.length < 1 ? "btn-disable" : ""} onClick={()=> this.props.delateAllConfirmed(this.props.todos)}>Delete all confirmed</button>
+                <button className={this.props.todos.length < 1 ? "btn-disable" : ""} onClick={()=> this.props.delateAllConfirmed(this.props.todos)}>Delete all Confirmed</button>
             </>
         )
     }

@@ -31,7 +31,6 @@ class TodoApp extends Component {
             }
         });
         this.setState({todos:newTodo})
-        console.log(this.state.todos)
     }
 
     delateTodo = todo =>{

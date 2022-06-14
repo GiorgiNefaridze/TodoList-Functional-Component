@@ -42,8 +42,8 @@ class TodoApp extends Component {
         this.setState({todos:[]});
     }
 
-    delateAllConfirmed = todo => {
-        todo.map(el => {
+    delateAllConfirmed = () => {
+        this.state.todos.map(el => {
             if(el.complete){
                 const delateAllConfirmed =  this.state.todos.filter(element => element.complete === false);
                 this.setState({todos:delateAllConfirmed})

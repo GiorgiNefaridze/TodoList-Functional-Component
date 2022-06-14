@@ -1,5 +1,4 @@
 import { Component } from 'react'
-import TodoDelateButtons from './todoDelates';
 import '../styles/addTodo.scss'
 
 class AddTodo extends Component {

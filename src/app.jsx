@@ -8,7 +8,8 @@ class TodoApp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todos:[]
+            todos:[],
+            input:""
         }
     };
 
@@ -63,14 +64,35 @@ class TodoApp extends Component {
         this.setState({todos: deleteAllChecked})
     }
 
+    editTodo = todo => {
+        const tempTodos = [...this.state.todos].map(el => {
+            if(todo.id === el.id){
+                return {
+                    id:todo.id,
+                    complete:todo.complete,
+                    checked:todo.checked,
+                    text:this.state.input
+                }
+            }
+            return el
+        });
+        this.setState({todos:tempTodos});
+        this.setState({input:""})
+    }
+
+    changeInputValueForEdit = async value => {
+        await this.setState({input: value});
+        await this.setState({value:""})
+    }
+
     render(){
         return (
             <div className="todo-app">
                 <header>
-                    <AddTodo todos={this.state.todos} addTodo={this.addTodo} />
+                    <AddTodo changeInputValueForEdit={this.changeInputValueForEdit} todos={this.state.todos} addTodo={this.addTodo} />
                 </header>
                 <main>
-                    <TodoList labelClicked={this.labelClicked} delateTodo={this.delateTodo} todos={this.state.todos} todoUpdate={this.todoUpdate} />
+                    <TodoList editTodo={this.editTodo} labelClicked={this.labelClicked} delateTodo={this.delateTodo} todos={this.state.todos} todoUpdate={this.todoUpdate} />
                 </main>
                 <footer>
                     <TodoDelateButtons deleteAllChecked={this.deleteAllChecked} todos={this.state.todos} delateAllConfirmed={this.delateAllConfirmed} delateAll={this.delateAll} />

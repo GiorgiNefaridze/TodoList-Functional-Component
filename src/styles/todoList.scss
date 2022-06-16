@@ -1,5 +1,5 @@
 main {
-    width: 60%;
+    width: 70%;
     max-height: 250px;
     display: flex;
     align-items: flex-start;
@@ -48,7 +48,7 @@ main {
                 gap: 0 10px;
 
                 button {
-                    width: 80px;
+                    width: 70px;
                     height: 40px;
                     outline: none;
                     border: none;
@@ -64,6 +64,15 @@ main {
 
                         &:hover {
                             background-color: rgb(10, 174, 174);
+                            transition: .3s;
+                        }
+                    }
+
+                    &:nth-child(2){
+                        background-color: rgb(52, 202, 112);
+                        
+                        &:hover {
+                            background-color: rgb(34, 130, 72);
                             transition: .3s;
                         }
                     }

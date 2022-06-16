@@ -5,20 +5,21 @@ class AddTodo extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            todo: "",
+            todo: {},
             value:""
         }
     };
 
-    inputValue = e => {
-        this.setState({value:e.target.value})
+    inputValue = async e => {
+        await this.setState({value:e.target.value})
         if(e.target.value === this.state.todo.text){
             this.setState({inputValidation: true})
         }else{
             this.setState({inputValidation:false})
         }
+        await this.props.changeInputValueForEdit(this.state.value);
     }
-
+    
     submitForm = async e => {
         e.preventDefault();
         if(this.state.value.length > 0){
@@ -33,7 +34,7 @@ class AddTodo extends Component {
             <>
                 <h1>Todo List</h1>
                 <form>
-                    <input type="text" onChange={this.inputValue} value={this.state.value} placeholder="Add your todo here..." />
+                    <input type="text" onChange={this.inputValue} value={this.state.value} placeholder="Add/Edit your todo here..." />
                     <button type="submit" onClick={this.submitForm}>Add</button>
                 </form>
                 {this.props.todos.length < 1 && <div className='todo-blink'>You have 0 todo in todo list</div>}

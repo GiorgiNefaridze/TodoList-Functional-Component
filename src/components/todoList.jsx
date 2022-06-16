@@ -21,6 +21,7 @@ class TodoList extends Component {
                         </div>
                         <div>
                             <button onClick={(e)=> this.props.todoUpdate(todo,e)}>Done</button>
+                            <button onClick={()=> this.props.editTodo(todo)}>Edit</button>
                             <button onClick={()=> this.props.delateTodo(todo)}>Delate</button>
                         </div>
                     </div>

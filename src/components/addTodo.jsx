@@ -1,47 +1,38 @@
-import { Component } from 'react'
+import { useState } from 'react'
 import '../styles/addTodo.scss'
 
-class AddTodo extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            todo: {},
-            value:""
-        }
-    };
+export default function AddTodo({addtodo,todos,inputValue}) {
 
-    inputValue = async e => {
-        await this.setState({value:e.target.value})
-        if(e.target.value === this.state.todo.text){
-            this.setState({inputValidation: true})
-        }else{
-            this.setState({inputValidation:false})
-        }
-        await this.props.changeInputValueForEdit(this.state.value);
+    const [value,setValue] = useState("")
+    const [inputValidation,setInputValidation] = useState(false)
+
+    const updateValue = (e) => {
+        setValue(e.target.value);
+        inputValue(e.target.value)
     }
-    
-    submitForm = async e => {
+
+    const submitForm = (e) => {
         e.preventDefault();
-        if(this.state.value.length > 0){
-            await this.setState({todo:{text:this.state.value,id:Math.floor(Math.random() * 500),complete:false}});
-            await this.props.addTodo(this.state.todo);
+        if(value.length > 0){
+            addtodo(value);
         }
-        await this.setState({value: ""});
+        setValue("");
+        todos.forEach(el => {
+            if(value === el.text){
+                setInputValidation(!inputValidation)
+            }
+        });
     }
 
-    render(){
-        return(
-            <>
-                <h1>Todo List</h1>
-                <form>
-                    <input type="text" onChange={this.inputValue} value={this.state.value} placeholder="Add/Edit your todo here..." />
-                    <button type="submit" onClick={this.submitForm}>Add</button>
-                </form>
-                {this.props.todos.length < 1 && <div className='todo-blink'>You have 0 todo in todo list</div>}
-                {this.state.inputValidation ? <p className="todo-blink">You have same todo in your list</p> : ""}
-            </>
-        )
-    }
+    return (
+        <>
+            <h1>Todo List</h1>
+            <form>
+                <input type="text" onChange={updateValue} value={value} placeholder="Add/Edit your todo here..." />
+                <button onClick={submitForm} type="submit">Add</button>
+            </form>
+           {todos.length < 1 &&  <p className='todo-blink'>You have 0 todo in todo list</p>}
+           {inputValidation ? <p className="todo-blink">You have same todo in your list</p> : ""}
+        </>
+    )
 }
-
-export default AddTodo

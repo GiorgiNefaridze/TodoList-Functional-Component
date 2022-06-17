@@ -1,105 +1,93 @@
-import { Component } from 'react'
-import AddTodo from './components/addTodo';
-import TodoList from './components/todoList';
-import TodoDelateButtons from './components/todoDelates';
+import { useState } from 'react'
+import AddTodo from './components/addTodo'
+import TodoList from './components/todoList'
+import TodoDeletes from './components/todoDeletes'
 import './styles/app.scss'
 
-class TodoApp extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            todos:[],
-            input:""
-        }
-    };
+export default function TodoApp() {
 
-    addTodo = todo => {
-        this.setState({todos:[...this.state.todos,todo]})
+    const [todos,setTodos] = useState([])
+    const [inpValue,setinpValue] = useState("")
+
+    const addtodo = (value) => {
+        const todo = {text:value,id:Math.floor(Math.random() * 500),complete:false,checked:false};
+        setTodos([todo,...todos]);
+    }
+    
+    const deleteTodo = (id) => {
+        const filterByDelete = todos.filter(el => id !== el.id);
+        setTodos(filterByDelete)
     }
 
-    todoUpdate = (todo,e) => {
-        const newTodo = this.state.todos.map(eachTodo => {
-            if(eachTodo === todo){
-                e.target.innerHTML = !todo.complete ? "Undo" : "Done"
+    const doneTodo = (id,e,todo) => {
+        const filterByDone = todos.map(el => {
+            if(id === el.id){
                 return {
-                    text:todo.text,
-                    id:todo.id,
-                    complete:!todo.complete,
-                    checked:todo.checked
-                }
-            }else{
-                return eachTodo
-            }
-        });
-        this.setState({todos:newTodo})
-    }
-
-    delateTodo = todo =>{
-        const filterByDelate = this.state.todos.filter(eachTodo => eachTodo.id !== todo.id);
-        this.setState({todos:filterByDelate})
-    }
-
-    delateAll = () => {
-        this.setState({todos:[]});
-    }
-
-    delateAllConfirmed = () => {
-        this.state.todos.map(el => {
-            if(el.complete){
-                const delateAllConfirmed =  this.state.todos.filter(element => element.complete === false);
-                this.setState({todos:delateAllConfirmed})
-            }
-        })
-    }
-
-    labelClicked = (todo,e) => {
-        if(!e.target.parentElement.childNodes[0].checked){
-            todo.checked = false;
-            todo.checked = !todo.checked
-        }
-    }
-
-    deleteAllChecked = () => {
-        const deleteAllChecked = this.state.todos.filter(todo => todo.checked !== true);
-        this.setState({todos: deleteAllChecked})
-    }
-
-    editTodo = todo => {
-        const tempTodos = [...this.state.todos].map(el => {
-            if(todo.id === el.id){
-                return {
-                    id:todo.id,
-                    complete:todo.complete,
-                    checked:todo.checked,
-                    text:this.state.input
+                    ...el,
+                    complete:!el.complete
                 }
             }
             return el
         });
-        this.setState({todos:tempTodos});
-        this.setState({input:""})
+        e.target.innerHTML = !todo.complete ? "Undo" : "Done";
+        setTodos(filterByDone)
     }
 
-    changeInputValueForEdit = async value => {
-        await this.setState({input: value});
-        await this.setState({value:""})
+    const editTodo = (todo) => {
+        const editedTodos = todos.map(el => {
+            if(todo.id === el.id){
+                return {
+                    ...el,
+                    text:inpValue
+                }
+            }
+            return el
+        })
+        setTodos(editedTodos)
     }
 
-    render(){
-        return (
-            <div className="todo-app">
-                <header>
-                    <AddTodo changeInputValueForEdit={this.changeInputValueForEdit} todos={this.state.todos} addTodo={this.addTodo} />
-                </header>
-                <main>
-                    <TodoList editTodo={this.editTodo} labelClicked={this.labelClicked} delateTodo={this.delateTodo} todos={this.state.todos} todoUpdate={this.todoUpdate} />
-                </main>
-                <footer>
-                    <TodoDelateButtons deleteAllChecked={this.deleteAllChecked} todos={this.state.todos} delateAllConfirmed={this.delateAllConfirmed} delateAll={this.delateAll} />
-                </footer>
-            </div>
-        )
+    const inputValue = text => {
+        setinpValue(text)
     }
+
+    const deleteAllTodo = () => {
+        setTodos([])
+    }
+
+    const deleteAllConfirmed = () => {
+        const filterByConfirmed = todos.filter(todo => todo.complete !== true)
+        setTodos(filterByConfirmed)
+    }
+
+    const deleteAllChecked = () => {
+        const filterByChecked = todos.filter(todo => todo.checked !== true);
+        setTodos(filterByChecked)
+    }
+
+    const checkCheckbox = (todo) => {
+        const check = todos.map(el => {
+            if(todo.id === el.id){
+                return {
+                    ...el,
+                    checked:!el.checked
+                }
+            }
+            return el
+        })
+        setTodos(check)
+    }
+
+    return (
+        <div className='todo-app'>
+            <header>
+                <AddTodo inputValue={inputValue} todos={todos} addtodo={addtodo} />
+            </header>
+            <main>
+                <TodoList checkCheckbox={checkCheckbox} editTodo={editTodo} doneTodo={doneTodo} deleteTodo={deleteTodo} todos={todos} />
+            </main>
+            <footer>
+                <TodoDeletes deleteAllChecked={deleteAllChecked} deleteAllConfirmed={deleteAllConfirmed} deleteAllTodo={deleteAllTodo} />
+            </footer>
+        </div>
+    )
 }
-
-export default TodoApp

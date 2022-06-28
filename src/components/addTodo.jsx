@@ -17,11 +17,7 @@ export default function AddTodo({addtodo,todos,inputValue}) {
             addtodo(value);
         }
         setValue("");
-        todos.forEach(el => {
-            if(value === el.text){
-                setInputValidation(!inputValidation)
-            }
-        });
+        todos.some(el => el.text === value) ? setInputValidation(!inputValidation) : setInputValidation(inputValidation)
     }
 
     return (

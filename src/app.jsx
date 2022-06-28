@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import AddTodo from './components/addTodo'
-import TodoList from './components/todoList'
-import TodoDeletes from './components/todoDeletes'
+import AddTodo from './components/AddTodo'
+import TodoList from './components/TodoList'
 import './styles/app.scss'
 
 export default function TodoApp() {
@@ -86,7 +85,9 @@ export default function TodoApp() {
                 <TodoList checkCheckbox={checkCheckbox} editTodo={editTodo} doneTodo={doneTodo} deleteTodo={deleteTodo} todos={todos} />
             </main>
             <footer>
-                <TodoDeletes deleteAllChecked={deleteAllChecked} deleteAllConfirmed={deleteAllConfirmed} deleteAllTodo={deleteAllTodo} />
+                <button onClick={()=> deleteAllTodo()}>Delete All</button>
+                <button onClick={()=> deleteAllChecked()}>Delete All Checked</button>
+                <button onClick={()=> deleteAllConfirmed()}>Delete all Confirmed</button>
             </footer>
         </div>
     )

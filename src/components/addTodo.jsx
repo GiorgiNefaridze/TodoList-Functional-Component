@@ -13,7 +13,7 @@ export default function AddTodo({addtodo,todos,inputValue}) {
 
     const submitForm = (e) => {
         e.preventDefault();
-        if(value.length > 0){
+        if(value.length > 0 && value.trim().length > 0){
             addtodo(value);
         }
         setValue("");
